@@ -1,0 +1,16 @@
+.DS_Store
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+
+# Xcode / Swift
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# Temporary output
+dist/
+build/
+screenshots/
