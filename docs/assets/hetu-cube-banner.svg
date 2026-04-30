@@ -1,0 +1,72 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="180" y1="40" x2="980" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E0B1A"/>
+      <stop offset="1" stop-color="#050508"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="320" y1="160" x2="620" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5E6B8"/>
+      <stop offset="0.52" stop-color="#D4A853"/>
+      <stop offset="1" stop-color="#8E6A24"/>
+    </linearGradient>
+    <linearGradient id="goldSoft" x1="300" y1="130" x2="650" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF2C8" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#D4A853" stop-opacity="0.03"/>
+    </linearGradient>
+    <filter id="glow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="28" fill="url(#bg)"/>
+  <circle cx="278" cy="146" r="128" fill="#251A42" opacity="0.34"/>
+  <circle cx="1038" cy="520" r="154" fill="#171220" opacity="0.55"/>
+  <path d="M0 526C132 464 236 446 374 462C530 480 650 566 804 576C922 583 1046 545 1200 436V630H0V526Z" fill="#09080E"/>
+
+  <g opacity="0.88">
+    <path d="M264 282L404 202L544 282L404 362L264 282Z" stroke="url(#gold)" stroke-width="4"/>
+    <path d="M264 282V430L404 510V362" stroke="url(#gold)" stroke-width="4"/>
+    <path d="M544 282V430L404 510" stroke="url(#gold)" stroke-width="4"/>
+    <path d="M404 202V362" stroke="url(#gold)" stroke-width="4"/>
+    <path d="M264 430L404 350L544 430" stroke="url(#gold)" stroke-width="4" opacity="0.7"/>
+    <path d="M404 202L404 140" stroke="url(#gold)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M404 510L404 560" stroke="url(#gold)" stroke-width="3" stroke-linecap="round" opacity="0.72"/>
+    <circle cx="264" cy="282" r="10" fill="#4FC3F7"/>
+    <circle cx="404" cy="202" r="10" fill="#66BB6A"/>
+    <circle cx="544" cy="282" r="10" fill="#FF7043"/>
+    <circle cx="264" cy="430" r="10" fill="#BDBDBD"/>
+    <circle cx="404" cy="510" r="10" fill="#D4A853"/>
+    <circle cx="544" cy="430" r="10" fill="#F5E6B8"/>
+    <circle cx="404" cy="362" r="14" fill="#D4A853" filter="url(#glow)"/>
+    <path d="M404 362C452 330 490 316 544 282" stroke="#D4A853" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+    <path d="M404 362C358 330 316 312 264 282" stroke="#D4A853" stroke-width="3" stroke-linecap="round" opacity="0.38"/>
+  </g>
+
+  <rect x="640" y="148" width="400" height="56" rx="28" fill="url(#goldSoft)" stroke="#D4A853" stroke-opacity="0.18"/>
+  <text x="666" y="183" fill="#D4A853" font-family="'SF Pro Display','Segoe UI',sans-serif" font-size="20" letter-spacing="4">
+    INTERACTIVE CULTURAL VISUALIZATION
+  </text>
+
+  <text x="640" y="286" fill="#F5E6B8" font-family="'SF Pro Display','Segoe UI',sans-serif" font-size="62" font-weight="700" letter-spacing="1.2">
+    Hetu Cube 3D
+  </text>
+  <text x="640" y="334" fill="#D5C4A1" font-family="'SF Pro Display','Segoe UI',sans-serif" font-size="28">
+    Static site, local Three.js bundle, optional iOS WebView shell
+  </text>
+  <text x="640" y="388" fill="#A89774" font-family="'SF Pro Text','Segoe UI',sans-serif" font-size="22">
+    Experimental spatial model presentation with staged narration and interaction
+  </text>
+
+  <g>
+    <rect x="640" y="436" width="118" height="38" rx="19" fill="#15111E" stroke="#2D253C"/>
+    <rect x="772" y="436" width="140" height="38" rx="19" fill="#15111E" stroke="#2D253C"/>
+    <rect x="926" y="436" width="110" height="38" rx="19" fill="#15111E" stroke="#2D253C"/>
+    <text x="671" y="460" fill="#E3D8BE" font-family="'SF Pro Text','Segoe UI',sans-serif" font-size="17">Three.js</text>
+    <text x="805" y="460" fill="#E3D8BE" font-family="'SF Pro Text','Segoe UI',sans-serif" font-size="17">GitHub Pages</text>
+    <text x="957" y="460" fill="#E3D8BE" font-family="'SF Pro Text','Segoe UI',sans-serif" font-size="17">iOS Shell</text>
+  </g>
+</svg>
