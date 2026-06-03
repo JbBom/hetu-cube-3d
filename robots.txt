@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jbbom.github.io/hetu-cube-3d/sitemap.xml
