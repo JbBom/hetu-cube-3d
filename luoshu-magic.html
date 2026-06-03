@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>洛书幻方 · 九宫格交互</title>
+<meta name="description" content="洛书九宫格幻方交互演示：横竖斜三数和皆为15，含飞行路径、八卦映射、对数和为10。">
+<meta property="og:title" content="洛书幻方 · 九宫格交互">
+<meta property="og:description" content="探索洛书幻方的数学之美：点击行列对角线看15求和，追踪飞行路径，查看八卦映射。">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;background:#050508;color:#e0d8c8;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px}
+h1{font-size:24px;font-weight:200;letter-spacing:8px;color:#d4a853;margin-bottom:4px;text-align:center}
+.sub{font-size:11px;color:#7a6848;letter-spacing:4px;margin-bottom:24px;text-align:center}
+.main{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;max-width:800px;width:100%}
+.grid-wrap{flex-shrink:0}
+.grid{display:grid;grid-template-columns:repeat(3,90px);grid-template-rows:repeat(3,90px);gap:3px;background:rgba(212,168,83,.12);border-radius:10px;padding:3px;position:relative}
+.cell{background:rgba(10,8,22,.9);border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;border:1px solid transparent;position:relative;user-select:none}
+.cell:hover{background:rgba(212,168,83,.08);border-color:rgba(212,168,83,.25);transform:translateY(-1px)}
+.cell.hl{background:rgba(212,168,83,.16)!important;border-color:#d4a853!important;box-shadow:0 0 18px rgba(212,168,83,.22);transform:scale(1.03);z-index:2}
+.cell.hl-pair{background:rgba(100,180,255,.1)!important;border-color:rgba(100,180,255,.35)!important}
+.num{font-size:32px;font-weight:700;color:#f0d890;line-height:1}
+.cn{font-size:18px;color:#a08050;margin-top:-2px}
+.bg{font-size:16px;opacity:.5;position:absolute;top:3px;right:5px}
+.info-panel{flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px}
+.card{background:rgba(10,8,22,.85);border:1px solid rgba(212,168,83,.1);border-radius:9px;padding:13px 15px}
+.card h3{font-size:13px;color:#d4a853;margin-bottom:7px;letter-spacing:1px}
+.sum-display{font-size:22px;text-align:center;padding:8px;border-radius:6px;background:rgba(0,0,0,.3);min-height:44px;display:flex;align-items:center;justify-content:center;color:#999;transition:all .3s}
+.sum-display.active{color:#f0d890;background:rgba(212,168,83,.1);font-size:20px;letter-spacing:1px}
+.sum-nums{color:#f0d890}.sum-eq{color:#7a6848;margin:0 4px}.sum-res{color:#4fc3f7;font-weight:bold}
+.btns{display:flex;gap:6px;flex-wrap:wrap}
+.btn{padding:6px 14px;border:1px solid rgba(212,168,83,.2);background:rgba(212,168,83,.05);color:#c9a855;border-radius:5px;cursor:pointer;font-size:11px;transition:all .2s;font-family:inherit;white-space:nowrap}
+.btn:hover{background:rgba(212,168,83,.14);border-color:rgba(212,168,83,.35)}
+.btn.on{background:rgba(212,168,83,.2);border-color:#d4a853;color:#f0d890}
+.legend{display:flex;flex-wrap:wrap;gap:8px;font-size:10px;color:#786848}
+.legend span{display:flex;align-items:center;gap:4px}
+.legend .dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.path-line{position:absolute;pointer-events:none;z-index:5;opacity:0;transition:opacity .4s}
+.path-line.show{opacity:1}
+.pair-info{font-size:11px;color:#b0a078;line-height:1.7;margin-top:4px}
+.back-link{position:fixed;top:12px;left:16px;color:#7a6848;text-decoration:none;font-size:11px;letter-spacing:1px;transition:color .2s}
+.back-link:hover{color:#d4a853}
+
+/* Flying Star path SVG overlay */
+.path-overlay{position:absolute;inset:-2px;pointer-events:none;z-index:4;opacity:0;transition:opacity .4s}
+.path-overlay.show{opacity:1}
+.path-overlay line{stroke:#4fc3f7;stroke-width:2;stroke-dasharray:6 3;animation:dash .6s linear infinite}
+.path-overlay circle{fill:#4fc3f7;opacity:.8}
+@keyframes dash{to{stroke-dashoffset:-9}}
+
+@media(max-width:700px){.main{flex-direction:column;align-items:center}.grid{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px)}.num{font-size:26px}.cn{font-size:15px}.info-panel{min-width:auto;width:100%}}
+</style>
+</head>
+<body>
+
+<a href="./" class="back-link">← 返回学习器</a>
+
+<h1>洛 书 幻 方</h1>
+<div class="sub">九宫格 · 三阶幻方 · 横竖斜皆十五</div>
+
+<div class="main">
+  <div class="grid-wrap">
+    <div class="grid" id="grid">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+
+  <div class="info-panel">
+    <div class="card">
+      <h3>🔢 求和</h3>
+      <div class="sum-display" id="sumDisplay">点击行列或对角线</div>
+    </div>
+
+    <div class="card">
+      <h3>🎮 模式</h3>
+      <div class="btns">
+        <button class="btn on" data-mode="sum" onclick="setMode('sum',this)">求和 15</button>
+        <button class="btn" data-mode="path" onclick="setMode('path',this)">飞行路径</button>
+        <button class="btn" data-mode="pair" onclick="setMode('pair',this)">对数和 10</button>
+        <button class="btn" data-mode="bagua" onclick="setMode('bagua',this)">八卦映射</button>
+      </div>
+      <div class="pair-info" id="modeInfo">点击任意行、列、对角线查看三数之和</div>
+    </div>
+
+    <div class="card">
+      <h3>📐 数学性质</h3>
+      <div class="legend">
+        <span><span class="dot" style="background:#f0d890"></span> 幻和 15</span>
+        <span><span class="dot" style="background:#4fc3f7"></span> 飞行路径</span>
+        <span><span class="dot" style="background:#66bb6a"></span> 对数和 10</span>
+        <span><span class="dot" style="background:#ff7043"></span> 差恒为 5</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<svg class="path-overlay" id="pathOverlay" viewBox="0 0 276 276"></svg>
+
+<script>
+// Lo Shu magic square data
+const cells = [
+  {row:0,col:0,num:4,cn:'四',bg:'巽',el:'☴',wux:'木'},
+  {row:0,col:1,num:9,cn:'九',bg:'离',el:'☲',wux:'火'},
+  {row:0,col:2,num:2,cn:'二',bg:'坤',el:'☷',wux:'土'},
+  {row:1,col:0,num:3,cn:'三',bg:'震',el:'☳',wux:'木'},
+  {row:1,col:1,num:5,cn:'五',bg:'中',el:'☯',wux:'土'},
+  {row:1,col:2,num:7,cn:'七',bg:'兑',el:'☱',wux:'金'},
+  {row:2,col:0,num:8,cn:'八',bg:'艮',el:'☶',wux:'土'},
+  {row:2,col:1,num:1,cn:'一',bg:'坎',el:'☵',wux:'水'},
+  {row:2,col:2,num:6,cn:'六',bg:'乾',el:'☰',wux:'金'}
+];
+
+const rows = [[0,1,2],[3,4,5],[6,7,8]]; // indices
+const cols = [[0,3,6],[1,4,7],[2,5,8]];
+const diags = [[0,4,8],[2,4,6]];
+const allLines = [...rows,...cols,...diags]; // 8 lines total
+
+// Flying star order: 1→2→3→4→5→6→7→8→9
+// Find cell with each num
+const flyingOrder = [];
+for (let n=1;n<=9;n++) {
+  flyingOrder.push(cells.findIndex(c=>c.num===n));
+}
+
+// Opposite pairs summing to 10
+const pairs = [[1,9],[2,8],[3,7],[4,6]]; // num pairs
+
+let mode = 'sum';
+let hlCells = new Set();
+
+function buildGrid() {
+  const grid = document.getElementById('grid');
+  grid.style.gridTemplateColumns = `repeat(3,90px)`;
+  grid.style.gridTemplateRows = `repeat(3,90px)`;
+
+  cells.forEach((c,i)=>{
+    const div = document.createElement('div');
+    div.className = 'cell';
+    div.dataset.index = i;
+    div.innerHTML = `<span class="num">${c.num}</span><span class="cn">${c.cn}</span><span class="bg">${c.el}</span>`;
+    div.addEventListener('click',()=>onCellClick(i));
+    grid.appendChild(div);
+  });
+
+  // Draw path lines
+  drawPathOverlay();
+}
+
+function onCellClick(idx) {
+  if (mode === 'sum') handleSumClick(idx);
+  else if (mode === 'path') handlePathClick(idx);
+  else if (mode === 'pair') handlePairClick(idx);
+  else if (mode === 'bagua') handleBaguaClick(idx);
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.cell').forEach(c=>c.classList.remove('hl','hl-pair'));
+  hlCells.clear();
+  document.getElementById('sumDisplay').className = 'sum-display';
+  document.getElementById('sumDisplay').textContent = '点击行列或对角线';
+}
+
+function highlightCells(indices, cls='hl') {
+  indices.forEach(i=>{
+    document.querySelector(`.cell[data-index="${i}"]`).classList.add(cls);
+    hlCells.add(i);
+  });
+}
+
+// --- Mode: Sum 15 ---
+function handleSumClick(idx) {
+  clearHighlights();
+  // Find which line this cell belongs to
+  let found = null;
+  for (const line of allLines) {
+    if (line.includes(idx)) { found = line; break; }
+  }
+  if (!found) return;
+
+  highlightCells(found);
+  const nums = found.map(i=>cells[i].num);
+  const sum = nums.reduce((a,b)=>a+b,0);
+  const disp = document.getElementById('sumDisplay');
+  disp.className = 'sum-display active';
+  disp.innerHTML = `<span class="sum-nums">${nums.join(' + ')}</span><span class="sum-eq">=</span><span class="sum-res">${sum}</span>`;
+}
+
+// --- Mode: Flying Star Path ---
+let pathStep = -1;
+function handlePathClick(idx) {
+  clearHighlights();
+  const cell = cells[idx];
+  const pos = flyingOrder.indexOf(idx);
+  if (pos === -1) return;
+
+  // Show step by step
+  if (pos !== pathStep + 1 && pos !== 0) {
+    // Reset if jumping
+    pathStep = -1;
+  }
+  pathStep = pos;
+
+  // Highlight all cells up to current step
+  const toHighlight = flyingOrder.slice(0, pathStep+1);
+  highlightCells(toHighlight);
+
+  const disp = document.getElementById('sumDisplay');
+  disp.className = 'sum-display active';
+  disp.innerHTML = `飞行路径 <span class="sum-res">${pathStep+1}/9</span> 步：${cell.cn}(${cell.num}) →`;
+
+  // Show path overlay
+  document.getElementById('pathOverlay').classList.add('show');
+  document.getElementById('modeInfo').textContent = '按数字1→2→3→...→9的顺序点击，追踪飞行星路径';
+}
+
+// --- Mode: Pair sum to 10 ---
+function handlePairClick(idx) {
+  clearHighlights();
+  const cell = cells[idx];
+  const pairNum = 10 - cell.num;
+  if (pairNum === 5) {
+    // Center - 5 pairs with itself
+    highlightCells([idx]);
+    document.getElementById('sumDisplay').className = 'sum-display active';
+    document.getElementById('sumDisplay').innerHTML = `<span class="sum-nums">5 + 5</span><span class="sum-eq">=</span><span class="sum-res">10</span>`;
+    document.getElementById('modeInfo').textContent = '中宫 5 自成一对（5+5=10）';
+    return;
+  }
+
+  const pairIdx = cells.findIndex(c=>c.num===pairNum);
+  if (pairIdx >= 0) {
+    highlightCells([idx], 'hl');
+    highlightCells([pairIdx], 'hl-pair');
+    document.getElementById('sumDisplay').className = 'sum-display active';
+    document.getElementById('sumDisplay').innerHTML = `<span class="sum-nums">${cell.num} + ${pairNum}</span><span class="sum-eq">=</span><span class="sum-res">10</span>`;
+    document.getElementById('modeInfo').textContent = `${cells[idx].cn}(${cell.num}) ↔ ${cells[pairIdx].cn}(${pairNum}) · 洛书四边对角和皆为 10`;
+  }
+}
+
+// --- Mode: Bagua Mapping ---
+function handleBaguaClick(idx) {
+  clearHighlights();
+  highlightCells([idx]);
+  const c = cells[idx];
+  const disp = document.getElementById('sumDisplay');
+  disp.className = 'sum-display active';
+  disp.innerHTML = `<span style="font-size:28px">${c.el}</span> <span class="sum-nums">${c.bg}</span> · 五行属<span class="sum-res">${c.wux}</span>`;
+  document.getElementById('modeInfo').textContent = `洛书数字 ${c.num} 对应${c.bg}卦${c.el}，方位${c.cn === '一'?'正北':c.cn==='九'?'正南':c.cn==='三'?'正东':c.cn==='七'?'正西':c.cn==='二'?'西南':c.cn==='四'?'东南':c.cn==='六'?'西北':c.cn==='八'?'东北':'中央'}`;
+}
+
+function resetPathMode() {
+  pathStep = -1;
+  document.getElementById('pathOverlay').classList.remove('show');
+}
+
+function setMode(m, btn) {
+  mode = m;
+  clearHighlights();
+  resetPathMode();
+  document.querySelectorAll('.btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+
+  const infos = {
+    sum: '点击任意行、列、对角线查看三数之和',
+    path: '按数字1→2→3→...→9的顺序点击，追踪飞行星路径',
+    pair: '点击任一数字，高亮其对数为10的伙伴（如1↔9, 2↔8, 3↔7, 4↔6）',
+    bagua: '点击任一格子查看八卦符号与五行属性'
+  };
+  document.getElementById('modeInfo').textContent = infos[m] || '';
+  document.getElementById('sumDisplay').textContent = mode==='path'?'点击数字 1 开始追踪':mode==='pair'?'点击任意数字查看对数':mode==='bagua'?'点击格子查看八卦属性':'点击行列或对角线';
+  document.getElementById('sumDisplay').className = 'sum-display';
+}
+
+function drawPathOverlay() {
+  const svg = document.getElementById('pathOverlay');
+  // Grid is 276x276 (3*90+2*3 gaps)
+  const cellSize = 90;
+  const gap = 3;
+  const offset = cellSize/2;
+
+  let pathD = '';
+  flyingOrder.forEach((idx,i)=>{
+    const cell = cells[idx];
+    const x = cell.col * (cellSize+gap) + offset;
+    const y = cell.row * (cellSize+gap) + offset;
+    if (i===0) pathD += `M${x},${y}`;
+    else pathD += ` L${x},${y}`;
+  });
+
+  svg.innerHTML = `
+    <path d="${pathD}" fill="none" stroke="#4fc3f7" stroke-width="2" stroke-dasharray="8 4" opacity="0.7"/>
+    ${flyingOrder.map((idx,i)=>{
+      const cell = cells[idx];
+      const x = cell.col*(cellSize+gap)+offset;
+      const y = cell.row*(cellSize+gap)+offset;
+      return `<circle cx="${x}" cy="${y}" r="3" fill="#4fc3f7" opacity="0.8"><animate attributeName="r" values="3;5;3" dur="1.5s" repeatCount="indefinite"/></circle>`;
+    }).join('')}
+  `;
+}
+
+buildGrid();
+setMode('sum', document.querySelector('[data-mode="sum"]'));
+</script>
+</body>
+</html>
