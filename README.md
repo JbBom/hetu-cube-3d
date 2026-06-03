@@ -177,12 +177,42 @@ hetu-cube-3d/
 
 ## 🌍 English
 
-**Hetu Luoshu Interactive Learner** — A browser-based 3D learning tool that visualizes the ancient Chinese *Hetu* (Yellow River Map) and *Luoshu* (Luo River Script) through interactive Three.js graphics.
+**Hetu Luoshu Interactive Learner** — A browser-based 3D learning tool that visualizes the ancient Chinese *Hetu* (Yellow River Map) and *Luoshu* (Luo River Script / Lo Shu Square) through interactive Three.js graphics.
 
-- 🎨 **3D Hetu Cube** — Orbit, zoom, and explore the number-pair structure in three dimensions
-- 🔢 **Luoshu Magic Square** — The famous 3×3 grid where every row, column, and diagonal sums to 15
-- 📖 **Concept Cards & Quiz** — Learn the philosophy, mathematics, and history behind the diagrams
-- 🍎 **iOS Shell** — SwiftUI + WKWebView wrapper for iPhone / iPad prototypes
+### Pages
+
+| Page | Description |
+|:---|:---|
+| [`/`](https://jbbom.github.io/hetu-cube-3d/) | **Home** — Vite-built SPA with cube, magic square, comparison view, concept cards, quiz, and study paths |
+| [`hetu-cube.html`](https://jbbom.github.io/hetu-cube-3d/hetu-cube.html) | **3D Hetu Cube** — Orbit, zoom, and explore the number-pair structure in three dimensions with phase-by-phase teaching demo |
+| [`luoshu-magic.html`](https://jbbom.github.io/hetu-cube-3d/luoshu-magic.html) | **Luoshu Magic Square** — The famous 3×3 grid where every row, column, and diagonal sums to 15; flying-star path & Bagua mapping |
+| [`learn.html`](https://jbbom.github.io/hetu-cube-3d/learn.html) | **Learning Center** — Three-tier learning path (Beginner → Intermediate → Advanced) with progress tracking and glossary |
+| [`system-learning.html`](https://jbbom.github.io/hetu-cube-3d/system-learning.html) | **System Learning Model** — 6-layer framework (Number, Position, Pairing, Change, Symbol, Verify) linking Hetu and Luoshu together |
+
+### Quick Start
+
+```bash
+git clone https://github.com/JbBom/hetu-cube-3d.git
+cd hetu-cube-3d
+python3 -m http.server 8080
+# Open http://127.0.0.1:8080/
+```
+
+### What makes this project unique
+
+Unlike static diagrams or pure math treatments, this project lets you:
+- **Spin a 3D cube** to see how the eight Hetu vertices form heaven/earth planes
+- **Click any row/column/diagonal** in the Luoshu grid to instantly verify the sum-15 property
+- **Watch a phase-by-phase animation** of the generating pairs (水 1→6, 火 2→7, 木 3→8, 金 4→9)
+- **Toggle between Hetu and Luoshu** views for the same number values
+- **Track your learning progress** across 12 modules (saved in your browser)
+
+### Tech Stack
+
+- **Three.js** r128 (bundled locally, no CDN dependency)
+- Pure static HTML + JS + CSS (Vite build for the home page)
+- SwiftUI + WKWebView iOS shell included
+- Ready for GitHub Pages (`.nojekyll` in place)
 
 > The legend of *Hetu* and *Luoshu* was inscribed as a **National Intangible Cultural Heritage of China** in 2014.
 

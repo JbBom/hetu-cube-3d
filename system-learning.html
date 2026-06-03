@@ -49,6 +49,22 @@ h1{font-size:30px;font-weight:200;letter-spacing:8px;color:#d4a853;margin-bottom
   .matrix{grid-template-columns:1fr}
   h1{font-size:24px;letter-spacing:5px}
 }
+@media(max-width:500px){
+  h1{font-size:20px;letter-spacing:3px}
+  .kicker{font-size:9px;letter-spacing:3px}
+  .lead{font-size:12px}
+  .wrap{padding:16px 14px 50px}
+  .topnav{gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .topnav a{font-size:9px;white-space:nowrap}
+  .card{padding:12px}
+  .card h2{font-size:13px}
+  .card p,.card li{font-size:11px}
+  .sec-title{font-size:14px;margin:24px 0 10px}
+  .axis-row{grid-template-columns:60px 1fr;padding:8px 10px;gap:8px}
+  .axis-name{font-size:12px}
+  .tag{width:20px;height:20px;font-size:10px}
+  .note{font-size:11px;padding:8px 12px}
+}
 </style>
 </head>
 <body>
@@ -125,5 +141,12 @@ h1{font-size:30px;font-weight:200;letter-spacing:8px;color:#d4a853;margin-bottom
 
   <div class="footer">河图洛书 · 系统学习模型 &copy; 2026</div>
 </div>
+<div class="mobile-footer"><a href="./">🏠 学习器</a><a href="./learn.html">📖 学习之路</a><a href="./hetu-cube.html">🧊 河图立方体</a><a href="./luoshu-magic.html">🔢 幻方</a></div>
+<style>
+.mobile-footer{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(5,5,8,.96);border-top:1px solid rgba(212,168,83,.12);padding:6px 10px;justify-content:space-around;z-index:200}
+.mobile-footer a{color:#7a6848;text-decoration:none;font-size:10px;letter-spacing:1px;padding:4px 2px;white-space:nowrap}
+.mobile-footer a:hover,.mobile-footer a:active{color:#d4a853}
+@media(max-width:500px){.mobile-footer{display:flex}body{padding-bottom:44px}}
+</style>
 </body>
 </html>

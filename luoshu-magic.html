@@ -49,7 +49,27 @@ h1{font-size:24px;font-weight:200;letter-spacing:8px;color:#d4a853;margin-bottom
 .path-overlay circle{fill:#4fc3f7;opacity:.8}
 @keyframes dash{to{stroke-dashoffset:-9}}
 
-@media(max-width:700px){.main{flex-direction:column;align-items:center}.grid{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px)}.num{font-size:26px}.cn{font-size:15px}.info-panel{min-width:auto;width:100%}}
+@media(max-width:700px){
+  .main{flex-direction:column;align-items:center}
+  .grid{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px)}
+  .num{font-size:26px}.cn{font-size:15px}
+  .info-panel{min-width:auto;width:100%}
+  h1{font-size:20px;letter-spacing:5px}
+}
+@media(max-width:450px){
+  h1{font-size:17px;letter-spacing:3px}
+  .sub{font-size:9px;letter-spacing:3px;margin-bottom:14px}
+  .grid{grid-template-columns:repeat(3,60px);grid-template-rows:repeat(3,60px)}
+  .num{font-size:22px}.cn{font-size:13px}
+  .bg{font-size:12px;top:2px;right:3px}
+  .card{padding:10px 12px}
+  .card h3{font-size:11px}
+  .sum-display{font-size:18px;padding:6px;min-height:36px}
+  .topnav{gap:8px;left:10px;top:8px}
+  .back-link{font-size:9px}
+  .legend{font-size:10px;gap:8px}
+  .legend .dot{width:6px;height:6px}
+}
 </style>
 </head>
 <body>
@@ -307,5 +327,12 @@ function drawPathOverlay() {
 buildGrid();
 setMode('sum', document.querySelector('[data-mode="sum"]'));
 </script>
+<div class="mobile-footer"><a href="./">🏠 学习器</a><a href="./learn.html">📖 学习之路</a><a href="./system-learning.html">🧭 系统模型</a><a href="./hetu-cube.html">🧊 河图立方体</a></div>
+<style>
+.mobile-footer{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(5,5,8,.96);border-top:1px solid rgba(212,168,83,.12);padding:6px 10px;justify-content:space-around;z-index:200}
+.mobile-footer a{color:#7a6848;text-decoration:none;font-size:10px;letter-spacing:1px;padding:4px 2px;white-space:nowrap}
+.mobile-footer a:hover,.mobile-footer a:active{color:#d4a853}
+@media(max-width:450px){.mobile-footer{display:flex}body{padding-bottom:40px}}
+</style>
 </body>
 </html>

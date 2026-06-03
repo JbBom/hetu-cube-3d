@@ -78,6 +78,25 @@ body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;background:#050508;colo
   .card-icon{font-size:22px;width:28px}
   .stats{gap:8px}
   .stat{padding:10px 12px}
+  .header h1{font-size:20px;letter-spacing:5px}
+  .topnav{gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .topnav a{font-size:9px;white-space:nowrap}
+}
+@media(max-width:420px){
+  .header h1{font-size:17px;letter-spacing:3px}
+  .header{padding:16px 0 12px}
+  .header .sub{font-size:9px;letter-spacing:3px}
+  .container{padding:16px 12px 50px}
+  .card{padding:10px 12px}
+  .card h3{font-size:12px}
+  .card p,.tier-desc,.step-text,.vocab-item{font-size:11px}
+  .tier-icon{font-size:20px;width:28px}
+  .step{flex-direction:column;gap:4px}
+  .step-num{font-size:12px;width:22px;height:22px}
+  .stat{padding:8px 10px}
+  .stat-label{font-size:9px}
+  .stat-value{font-size:16px}
+  .vocab-list{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -388,5 +407,12 @@ function toggleCheck(card) {
 // Init
 updateUI();
 </script>
+<div class="mobile-footer"><a href="./">🏠 学习器</a><a href="./hetu-cube.html">🧊 河图立方体</a><a href="./luoshu-magic.html">🔢 幻方</a><a href="./system-learning.html">🧭 系统模型</a></div>
+<style>
+.mobile-footer{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(5,5,8,.96);border-top:1px solid rgba(212,168,83,.12);padding:6px 10px;justify-content:space-around;z-index:200}
+.mobile-footer a{color:#7a6848;text-decoration:none;font-size:10px;letter-spacing:1px;padding:4px 2px;white-space:nowrap}
+.mobile-footer a:hover,.mobile-footer a:active{color:#d4a853}
+@media(max-width:420px){.mobile-footer{display:flex}body{padding-bottom:44px}}
+</style>
 </body>
 </html>
