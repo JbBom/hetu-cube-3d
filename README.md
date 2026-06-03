@@ -11,22 +11,16 @@
     <img src="https://img.shields.io/badge/GitHub%20Pages-Ready-0F766E?style=flat-square" alt="GitHub Pages Ready" />
     <img src="https://img.shields.io/badge/License-MIT-2563EB?style=flat-square" alt="MIT License" />
     <img src="https://img.shields.io/github/stars/JbBom/hetu-cube-3d?style=flat-square" alt="GitHub stars" />
+    <img src="https://img.shields.io/badge/%F0%9F%8F%9B%EF%B8%8F_%E9%9D%9E%E9%81%97-%E5%9B%BD%E5%AE%B6%E7%BA%A7-8B0000?style=flat-square" alt="Intangible Cultural Heritage" />
   </p>
 </div>
 
-> 这是一个基于 `Three.js` 的交互式静态前端项目。新版首页从单一的“河图立方体 3D 展示”扩展为“河图洛书交互学习器”，同时提供河图立方体、洛书九宫、河图与洛书对照、概念卡、入门步骤和知识测验。
-
----
-
-## 📸 预览
-
 <div align="center">
-  <img src="docs/assets/screenshot-hero.png" alt="河图立方体 3D 交互截图" width="90%" />
-  <p><em>▲ 河图立方体 3D 交互视图（首页）</em></p>
-  <br/>
-  <img src="docs/assets/screenshot-full.png" alt="完整页面截图" width="90%" />
-  <p><em>▲ 完整页面：洛书九宫 + 概念卡 + 知识测验</em></p>
+  <img src="docs/assets/demo.gif" alt="Hetu Cube demo animation" width="80%" />
+  <p><em>▲ 河图立方体 3D 旋转演示</em></p>
 </div>
+
+> 这是一个基于 `Three.js` 的交互式静态前端项目。新版首页从单一的“河图立方体 3D 展示”扩展为“河图洛书交互学习器”，同时提供河图立方体、洛书九宫、河图与洛书对照、概念卡、入门步骤和知识测验。
 
 ---
 
@@ -38,6 +32,24 @@
 | 面向初学者的河图洛书学习页面 | 历史定论 |
 | 实验性三维模型与九宫格对照展示 | 科学证明 |
 | 可继续封装为 GitHub Pages / App 原型 | — |
+
+---
+
+## 📸 截图
+
+<details open>
+<summary>展开查看截图</summary>
+<br/>
+<div align="center">
+  <img src="docs/assets/screenshot-hero.png" alt="河图立方体 3D 交互截图" width="90%" />
+  <p><em>▲ 河图立方体 3D 交互视图（首页）</em></p>
+  <br/>
+  <img src="docs/assets/screenshot-full.png" alt="完整页面截图" width="90%" />
+  <p><em>▲ 完整页面：洛书九宫 + 概念卡 + 知识测验</em></p>
+</div>
+</details>
+
+---
 
 ## ✨ 核心特性
 
@@ -93,6 +105,7 @@ hetu-cube-3d/
 ├── docs/
 │   └── assets/             # 文档配图
 │       ├── hetu-cube-banner.svg
+│       ├── demo.gif
 │       ├── screenshot-hero.png
 │       └── screenshot-full.png
 ├── HetuCubeIOS/            # iOS 壳工程（SwiftUI + WKWebView）
@@ -101,6 +114,9 @@ hetu-cube-3d/
 │       ├── HetuCubeApp.swift
 │       ├── HetuWebView.swift
 │       └── Web/
+├── robots.txt              # SEO
+├── sitemap.xml             # 站点地图
+├── CONTRIBUTING.md         # 贡献指南
 ├── README.md
 ├── LICENSE                 # MIT
 ├── THIRD_PARTY_NOTICES.md
@@ -129,3 +145,18 @@ hetu-cube-3d/
 ## 📄 许可证
 
 本项目采用 [MIT License](LICENSE)。
+
+---
+
+## 🌍 English
+
+**Hetu Luoshu Interactive Learner** — A browser-based 3D learning tool that visualizes the ancient Chinese *Hetu* (Yellow River Map) and *Luoshu* (Luo River Script) through interactive Three.js graphics.
+
+- 🎨 **3D Hetu Cube** — Orbit, zoom, and explore the number-pair structure in three dimensions
+- 🔢 **Luoshu Magic Square** — The famous 3×3 grid where every row, column, and diagonal sums to 15
+- 📖 **Concept Cards & Quiz** — Learn the philosophy, mathematics, and history behind the diagrams
+- 🍎 **iOS Shell** — SwiftUI + WKWebView wrapper for iPhone / iPad prototypes
+
+> The legend of *Hetu* and *Luoshu* was inscribed as a **National Intangible Cultural Heritage of China** in 2014.
+
+**Live Demo:** https://jbbom.github.io/hetu-cube-3d/

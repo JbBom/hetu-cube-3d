@@ -1,0 +1,20 @@
+{
+  "name": "河图洛书 · 交互学习器",
+  "short_name": "河图洛书",
+  "description": "河图立方体、洛书九宫、数理对照——Three.js 驱动的交互式 3D 学习工具",
+  "start_url": "/hetu-cube-3d/",
+  "scope": "/hetu-cube-3d/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050508",
+  "theme_color": "#111827",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "docs/assets/hetu-cube-banner.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
