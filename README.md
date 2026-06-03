@@ -61,6 +61,7 @@
 | 🔢 幻方探索 | 独立[洛书幻方页](luoshu-magic.html)：点击求和 15、飞行路径、八卦映射 |
 | 🎬 交互 | 阶段式演化播放、聚焦查看、讲解提示、顶点详情面板 |
 | 📚 内容 | 概念卡、入门引导、知识测验、分享入口 |
+| 🎓 学习路线 | [学习中心](learn.html)：三级递进（入门→进阶→高级）+ 进度追踪 + 术语表 |
 | 📱 适配 | 桌面浏览 + 移动端展示 |
 | 🍎 iOS 原型 | 附带 `WKWebView` 封装壳，可快速封装为 iPhone / iPad App |
 
@@ -99,6 +100,7 @@ python3 -m http.server 8080
 hetu-cube-3d/
 ├── index.html              # 主入口（GitHub Pages）
 ├── hetu-cube.html          # 独立立方体展示页
+├── learn.html              # 学习中心（三级路线 + 进度追踪 + 术语表）
 ├── luoshu-magic.html       # 洛书幻方交互页（求和/路径/八卦）
 ├── three.min.js            # Three.js r128 本地副本
 ├── assets/                 # 打包后的 CSS / JS

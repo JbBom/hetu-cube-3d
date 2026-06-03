@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学习之路 · 河图洛书</title>
+<meta name="description" content="河图洛书系统学习路线：从入门到精通，分三级递进，含进度追踪、术语表和交互练习。">
+<meta property="og:title" content="学习之路 · 河图洛书">
+<meta property="og:description" content="三级递进学习路线：入门→进阶→高级，含进度追踪和交互练习。">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;background:#050508;color:#e0d8c8;min-height:100vh;line-height:1.6}
+.container{max-width:820px;margin:0 auto;padding:24px 20px 60px}
+
+/* Header */
+.header{text-align:center;padding:30px 0 20px}
+.header h1{font-size:26px;font-weight:200;letter-spacing:8px;color:#d4a853;margin-bottom:6px}
+.header .sub{font-size:11px;color:#7a6848;letter-spacing:4px}
+.home-link{display:inline-block;margin-top:10px;color:#7a6848;text-decoration:none;font-size:11px;letter-spacing:1px;transition:color .2s}
+.home-link:hover{color:#d4a853}
+
+/* Progress bar */
+.progress-wrap{margin:20px 0 30px}
+.progress-label{display:flex;justify-content:space-between;font-size:11px;color:#786848;margin-bottom:5px}
+.progress-bar{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#d4a853,#f5e6b8);border-radius:2px;transition:width .4s ease;width:0%}
+
+/* Section title */
+.sec-title{font-size:15px;font-weight:600;letter-spacing:2px;margin:32px 0 14px;display:flex;align-items:center;gap:8px}
+.sec-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.sec-dot.beg{background:#66bb6a;box-shadow:0 0 8px rgba(102,187,106,.3)}
+.sec-dot.int{background:#d4a853;box-shadow:0 0 8px rgba(212,168,83,.3)}
+.sec-dot.adv{background:#ff7043;box-shadow:0 0 8px rgba(255,112,67,.3)}
+
+/* Card */
+.card{background:rgba(10,8,22,.85);border:1px solid rgba(212,168,83,.1);border-radius:10px;padding:16px 18px;margin-bottom:10px;display:flex;align-items:flex-start;gap:14px;transition:all .25s;cursor:pointer}
+.card:hover{border-color:rgba(212,168,83,.25);background:rgba(15,12,28,.9)}
+.card.done{opacity:.55;border-color:rgba(255,255,255,.04)}
+.card.done:hover{opacity:.7}
+
+/* Checkbox */
+.cb-wrap{flex-shrink:0;padding-top:2px}
+.cb{width:22px;height:22px;border-radius:50%;border:2px solid rgba(212,168,83,.3);display:flex;align-items:center;justify-content:center;transition:all .25s;font-size:12px;color:transparent}
+.cb.checked{background:rgba(212,168,83,.18);border-color:#d4a853;color:#f0d890}
+.card:hover .cb:not(.checked){border-color:rgba(212,168,83,.5)}
+
+/* Card content */
+.card-content{flex:1;min-width:0}
+.card-title{font-size:14px;font-weight:600;color:#f0d890;margin-bottom:3px}
+.card-desc{font-size:11px;color:#b0a078;line-height:1.6}
+.card-actions{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.card-link{font-size:10px;padding:3px 10px;border:1px solid rgba(212,168,83,.15);border-radius:4px;color:#c9a855;text-decoration:none;transition:all .2s;white-space:nowrap;display:inline-block}
+.card-link:hover{background:rgba(212,168,83,.1);border-color:rgba(212,168,83,.35)}
+.card-link.external{font-size:9px;color:#786848;border-color:rgba(255,255,255,.06)}
+.card-icon{font-size:28px;flex-shrink:0;width:36px;text-align:center;opacity:.75}
+
+/* Stats row */
+.stats{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0}
+.stat{background:rgba(10,8,22,.8);border:1px solid rgba(212,168,83,.08);border-radius:8px;padding:12px 18px;text-align:center;flex:1;min-width:100px}
+.stat-num{font-size:22px;font-weight:700;color:#f0d890}
+.stat-label{font-size:10px;color:#7a6848;margin-top:2px;letter-spacing:1px}
+
+/* Glossary */
+.glossary{margin-top:30px}
+.gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+.gloss-item{background:rgba(10,8,22,.7);border:1px solid rgba(255,255,255,.04);border-radius:7px;padding:10px 13px;font-size:11px}
+.gloss-term{color:#d4a853;font-weight:600;margin-bottom:2px}
+.gloss-def{color:#b0a078;line-height:1.6}
+
+/* Footer */
+.footer{text-align:center;padding:40px 0 20px;font-size:10px;color:#555;letter-spacing:1px}
+
+/* Next step arrow */
+.next-step{text-align:center;color:#7a6848;font-size:18px;margin:4px 0;letter-spacing:2px}
+
+@media(max-width:600px){
+  .card{padding:12px 14px;gap:10px}
+  .card-icon{font-size:22px;width:28px}
+  .stats{gap:8px}
+  .stat{padding:10px 12px}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+  <h1>学 习 之 路</h1>
+  <div class="sub">河图洛书 · 三级递进 · 从入门到精通</div>
+  <a href="./" class="home-link">← 返回学习器</a>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>学习进度</span><span id="progressText">0/12</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num" id="statBeg">0/4</div><div class="stat-label">🟢 入门完成</div></div>
+  <div class="stat"><div class="stat-num" id="statInt">0/4</div><div class="stat-label">🟡 进阶完成</div></div>
+  <div class="stat"><div class="stat-num" id="statAdv">0/4</div><div class="stat-label">🔴 高级完成</div></div>
+</div>
+
+<!-- ==================== LEVEL 1: BEGINNER ==================== -->
+<div class="sec-title"><span class="sec-dot beg"></span> 🟢 入门 · 建立直觉</div>
+
+<div class="card" data-id="b1" onclick="toggleCheck(this)">
+  <div class="card-icon">📖</div>
+  <div class="card-content">
+    <div class="card-title">1. 河图洛书是什么？</div>
+    <div class="card-desc">了解河图（黄河之图）和洛书（洛水之书）的起源传说：龙马负图、神龟献书。理解它们在中国文化中的核心地位。</div>
+    <div class="card-actions">
+      <a href="./" class="card-link" onclick="event.stopPropagation()">📱 打开学习器 → 入门引导</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="card" data-id="b2" onclick="toggleCheck(this)">
+  <div class="card-icon">🔢</div>
+  <div class="card-content">
+    <div class="card-title">2. 洛书幻方初探</div>
+    <div class="card-desc">打开洛书幻方页，用"求和 15"模式点击各行列对角线，亲手验证"横竖斜三数和皆为 15"这一神奇性质。</div>
+    <div class="card-actions">
+      <a href="./luoshu-magic.html" class="card-link" onclick="event.stopPropagation()">🔢 幻方交互页 → 求和模式</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="card" data-id="b3" onclick="toggleCheck(this)">
+  <div class="card-icon">🔗</div>
+  <div class="card-content">
+    <div class="card-title">3. 生成对——河图的核心</div>
+    <div class="card-desc">理解五对"生成数"：天一生水地六成之（1↔6）、地二生火天七成之（2↔7）、天三生木地八成之（3↔8）、地四生金天九成之（4↔9）、天五生土地十成之（5↔10）。</div>
+    <div class="card-actions">
+      <a href="./hetu-cube.html" class="card-link" onclick="event.stopPropagation()">🧊 河图立方体 → 演化播放</a>
+      <a href="./" class="card-link" onclick="event.stopPropagation()">📱 学习器 → 概念卡</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="card" data-id="b4" onclick="toggleCheck(this)">
+  <div class="card-icon">📝</div>
+  <div class="card-content">
+    <div class="card-title">4. 自我测验</div>
+    <div class="card-desc">完成入门级知识测验，检验你对基本概念的掌握。涵盖：生成对、幻方常数、数字方位。</div>
+    <div class="card-actions">
+      <a href="./" class="card-link" onclick="event.stopPropagation()">📱 学习器 → 知识测验</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="next-step">↓</div>
+
+<!-- ==================== LEVEL 2: INTERMEDIATE ==================== -->
+<div class="sec-title"><span class="sec-dot int"></span> 🟡 进阶 · 深入数理</div>
+
+<div class="card" data-id="i1" onclick="toggleCheck(this)">
+  <div class="card-icon">🧊</div>
+  <div class="card-content">
+    <div class="card-title">5. 河图立方体 3D 演化</div>
+    <div class="card-desc">观看河图立方体从顶点落位到完整展开的 7 个演化阶段。理解数字在三维空间中的排列规律，感受"天圆地方"的立体化表达。</div>
+    <div class="card-actions">
+      <a href="./hetu-cube.html" class="card-link" onclick="event.stopPropagation()">🧊 立方体页 → 点击 ▶ 播放演化</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="card" data-id="i2" onclick="toggleCheck(this)">
+  <div class="card-icon">⭐</div>
+  <div class="card-content">
+    <div class="card-title">6. 幻方数学之美</div>
+    <div class="card-desc">深入幻方的数理：不仅横竖斜和为 15，四边对角和为 10（4+6=10, 2+8=10, 9+1=10, 3+7=10），且相邻格差恒为 5。</div>
+    <div class="card-actions">
+      <a href="./luoshu-magic.html" class="card-link" onclick="event.stopPropagation()">🔢 幻方页 → 对数和/飞行路径模式</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="card" data-id="i3" onclick="toggleCheck(this)">
+  <div class="card-icon">🗺️</div>
+  <div class="card-content">
+    <div class="card-title">7. 飞行星路径</div>
+    <div class="card-desc">追踪洛书数字 1→2→3→...→9 的飞行星 zig-zag 路线。理解这个路径如何成为风水罗盘"飞星派"的理论基础。</div>
+    <div class="card-actions">
+      <a href="./luoshu-magic.html" class="card-link" onclick="event.stopPropagation()">🔢 幻方页 → 飞行路径模式</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="card" data-id="i4" onclick="toggleCheck(this)">
+  <div class="card-icon">🔄</div>
+  <div class="card-content">
+    <div class="card-title">8. 河图与洛书的转化</div>
+    <div class="card-desc">在对照视图中比较河图和洛书：火的 2,7 与金的 4,9 互换位置，土 5 显用而土 10 藏于用。理解两者之间的数学转换关系。</div>
+    <div class="card-actions">
+      <a href="./" class="card-link" onclick="event.stopPropagation()">📱 学习器 → 对照视图</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="next-step">↓</div>
+
+<!-- ==================== LEVEL 3: ADVANCED ==================== -->
+<div class="sec-title"><span class="sec-dot adv"></span> 🔴 高级 · 融会贯通</div>
+
+<div class="card" data-id="a1" onclick="toggleCheck(this)">
+  <div class="card-icon">☯️</div>
+  <div class="card-content">
+    <div class="card-title">9. 八卦与洛书的映射</div>
+    <div class="card-desc">掌握洛书九宫与八卦的一一对应：1=坎☵、2=坤☷、3=震☳、4=巽☴、6=乾☰、7=兑☱、8=艮☶、9=离☲。理解五行（水火木金土）在九宫中的分布规律。</div>
+    <div class="card-actions">
+      <a href="./luoshu-magic.html" class="card-link" onclick="event.stopPropagation()">🔢 幻方页 → 八卦映射模式</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="card" data-id="a2" onclick="toggleCheck(this)">
+  <div class="card-icon">🧬</div>
+  <div class="card-content">
+    <div class="card-title">10. 阴阳旋转面与鬼神</div>
+    <div class="card-desc">理解河图立方体的阴阳两面：阳面右旋（3→8→2→7）和阴面左旋（9→6→4→1）。理解"神"（阳气下沉）和"鬼"（阴气上升）的概念。</div>
+    <div class="card-actions">
+      <a href="./hetu-cube.html" class="card-link" onclick="event.stopPropagation()">🧊 立方体页 → 阴阳旋转面面板</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="card" data-id="a3" onclick="toggleCheck(this)">
+  <div class="card-icon">🌐</div>
+  <div class="card-content">
+    <div class="card-title">11. 跨文化视角</div>
+    <div class="card-desc">比较河图洛书与毕达哥拉斯"万物皆数"、莱布尼茨二进制发现、卡巴拉生命之树。理解不同文明独立发现的数字和谐结构。</div>
+    <div class="card-actions">
+      <a href="./" class="card-link" onclick="event.stopPropagation()">📱 学习器 → 概念卡"西方类似的数理传统"</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<div class="card" data-id="a4" onclick="toggleCheck(this)">
+  <div class="card-icon">🏆</div>
+  <div class="card-content">
+    <div class="card-title">12. 综合测验</div>
+    <div class="card-desc">完成高级知识测验，涵盖：生成对、幻方性质、八卦映射、阴阳旋转、河洛转化、跨文化比较。</div>
+    <div class="card-actions">
+      <a href="./" class="card-link" onclick="event.stopPropagation()">📱 学习器 → 知识测验</a>
+    </div>
+  </div>
+  <div class="cb-wrap"><div class="cb">✓</div></div>
+</div>
+
+<!-- ==================== GLOSSARY ==================== -->
+<div class="glossary">
+  <div class="sec-title"><span class="sec-dot int"></span> 📚 关键术语</div>
+  <div class="gloss-grid">
+    <div class="gloss-item">
+      <div class="gloss-term">河图 Hé Tú</div>
+      <div class="gloss-def">黄河之图，传为龙马所负。十数图，以生成对排列，核心为 1-6, 2-7, 3-8, 4-9, 5-10 五对。</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">洛书 Luò Shū</div>
+      <div class="gloss-def">洛水之书，传为神龟所负。九数图，3×3 幻方，横竖斜三数和皆为 15。</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">生成对</div>
+      <div class="gloss-def">河图的核心结构：每对由一个"生数"（1-5）和一个"成数"（6-10）组成，差为 5。</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">幻方 Magic Square</div>
+      <div class="gloss-def">n×n 网格，每行、每列、两对角线上数字之和相等。洛书是最早的三阶幻方。</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">八卦 Bā Guà</div>
+      <div class="gloss-def">八个三爻符号：乾☰兑☱离☲震☳巽☴坎☵艮☶坤☷，代表天地间八种基本现象。</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">五行 Wǔ Xíng</div>
+      <div class="gloss-def">金、木、水、火、土五种基本元素，相生相克，与数字方位一一对应。</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">飞行星 Flying Star</div>
+      <div class="gloss-def">洛书数字 1→9 的 zig-zag 路径，是风水"飞星派"的理论基础。</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">天干 Tiān Gān</div>
+      <div class="gloss-def">甲乙丙丁戊己庚辛壬癸，十个天干与河图生成对一一对应。</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">大衍之数</div>
+      <div class="gloss-def">天地之数总和 55（1+2+...+10），《周易》占筮的数学基础。</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">非遗 (ICH)</div>
+      <div class="gloss-def">河图洛书传说于 2014 年被列入中国国家级非物质文化遗产。</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  河图洛书 · 交互学习器 &copy; 2025 · 
+  <a href="https://github.com/JbBom/hetu-cube-3d" style="color:#7a6848">GitHub</a>
+</div>
+
+</div><!-- container -->
+
+<script>
+const TOTAL = 12;
+const BEG_IDS = ['b1','b2','b3','b4'];
+const INT_IDS = ['i1','i2','i3','i4'];
+const ADV_IDS = ['a1','a2','a3','a4'];
+
+function loadProgress() {
+  try {
+    return JSON.parse(localStorage.getItem('hetu-learn-progress') || '[]');
+  } catch(e) { return []; }
+}
+function saveProgress(ids) {
+  localStorage.setItem('hetu-learn-progress', JSON.stringify(ids));
+}
+
+function updateUI() {
+  const done = loadProgress();
+  const total = done.length;
+  const begDone = BEG_IDS.filter(id=>done.includes(id)).length;
+  const intDone = INT_IDS.filter(id=>done.includes(id)).length;
+  const advDone = ADV_IDS.filter(id=>done.includes(id)).length;
+
+  // Progress bar
+  document.getElementById('progressText').textContent = `${total}/${TOTAL}`;
+  document.getElementById('progressFill').style.width = `${(total/TOTAL)*100}%`;
+
+  // Stats
+  document.getElementById('statBeg').textContent = `${begDone}/4`;
+  document.getElementById('statInt').textContent = `${intDone}/4`;
+  document.getElementById('statAdv').textContent = `${advDone}/4`;
+
+  // Check marks + card states
+  document.querySelectorAll('.card').forEach(card=>{
+    const id = card.dataset.id;
+    const cb = card.querySelector('.cb');
+    if (done.includes(id)) {
+      card.classList.add('done');
+      cb.classList.add('checked');
+    } else {
+      card.classList.remove('done');
+      cb.classList.remove('checked');
+    }
+  });
+}
+
+function toggleCheck(card) {
+  const id = card.dataset.id;
+  const done = loadProgress();
+  const idx = done.indexOf(id);
+  if (idx >= 0) {
+    done.splice(idx, 1);
+  } else {
+    done.push(id);
+  }
+  saveProgress(done);
+  updateUI();
+}
+
+// Init
+updateUI();
+</script>
+</body>
+</html>
