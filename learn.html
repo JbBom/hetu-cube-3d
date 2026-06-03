@@ -89,6 +89,7 @@ body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;background:#050508;colo
   <h1>学 习 之 路</h1>
   <div class="sub">河图洛书 · 三级递进 · 从入门到精通</div>
   <a href="./" class="home-link">← 返回学习器</a>
+  <a href="./system-learning.html" class="home-link" style="margin-left:14px">系统学习模型 →</a>
 </div>
 
 <div class="progress-wrap">
@@ -100,6 +101,17 @@ body{font-family:'Segoe UI','Microsoft YaHei',sans-serif;background:#050508;colo
   <div class="stat"><div class="stat-num" id="statBeg">0/4</div><div class="stat-label">🟢 入门完成</div></div>
   <div class="stat"><div class="stat-num" id="statInt">0/4</div><div class="stat-label">🟡 进阶完成</div></div>
   <div class="stat"><div class="stat-num" id="statAdv">0/4</div><div class="stat-label">🔴 高级完成</div></div>
+</div>
+
+<div class="card" onclick="location.href='./system-learning.html'">
+  <div class="card-icon">🧭</div>
+  <div class="card-content">
+    <div class="card-title">先看系统地图：数、位、配、变、象、验</div>
+    <div class="card-desc">用六层模型把河图生成对、洛书九宫、五行八卦和交互练习串起来，适合在正式学习前建立整体框架。</div>
+    <div class="card-actions">
+      <a href="./system-learning.html" class="card-link" onclick="event.stopPropagation()">🧭 打开系统学习模型</a>
+    </div>
+  </div>
 </div>
 
 <!-- ==================== LEVEL 1: BEGINNER ==================== -->
@@ -349,6 +361,7 @@ function updateUI() {
   document.querySelectorAll('.card').forEach(card=>{
     const id = card.dataset.id;
     const cb = card.querySelector('.cb');
+    if (!id || !cb) return;
     if (done.includes(id)) {
       card.classList.add('done');
       cb.classList.add('checked');

@@ -1,10 +1,15 @@
-const CACHE_NAME = 'hetu-cube-v1.0.3';
+const CACHE_NAME = 'hetu-cube-v1.0.7';
 const ASSETS = [
-  '/hetu-cube-3d/',
-  '/hetu-cube-3d/index.html',
-  '/hetu-cube-3d/hetu-cube.html',
-  '/hetu-cube-3d/three.min.js',
-  '/hetu-cube-3d/manifest.json'
+  './',
+  './index.html',
+  './hetu-cube.html',
+  './learn.html',
+  './luoshu-magic.html',
+  './system-learning.html',
+  './three.min.js',
+  './manifest.json',
+  './assets/index-UtkUvGxl.js',
+  './assets/index-COmTXZFF.css'
 ];
 
 // Cache on install

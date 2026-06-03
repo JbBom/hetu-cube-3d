@@ -38,7 +38,8 @@ h1{font-size:24px;font-weight:200;letter-spacing:8px;color:#d4a853;margin-bottom
 .path-line{position:absolute;pointer-events:none;z-index:5;opacity:0;transition:opacity .4s}
 .path-line.show{opacity:1}
 .pair-info{font-size:11px;color:#b0a078;line-height:1.7;margin-top:4px}
-.back-link{position:fixed;top:12px;left:16px;color:#7a6848;text-decoration:none;font-size:11px;letter-spacing:1px;transition:color .2s}
+.topnav{position:fixed;top:12px;left:16px;display:flex;gap:16px;z-index:100;flex-wrap:wrap}
+.back-link{color:#7a6848;text-decoration:none;font-size:11px;letter-spacing:1px;transition:color .2s}
 .back-link:hover{color:#d4a853}
 
 /* Flying Star path SVG overlay */
@@ -53,9 +54,10 @@ h1{font-size:24px;font-weight:200;letter-spacing:8px;color:#d4a853;margin-bottom
 </head>
 <body>
 
-<nav style="position:fixed;top:12px;left:16px;display:flex;gap:16px;z-index:100">
+<nav class="topnav">
   <a href="./" class="back-link">← 学习器</a>
   <a href="./learn.html" class="back-link">📖 学习之路</a>
+  <a href="./system-learning.html" class="back-link">🧭 系统模型</a>
   <a href="./hetu-cube.html" class="back-link">🧊 立方体</a>
 </nav>
 
